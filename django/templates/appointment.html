@@ -1,0 +1,322 @@
+{% extends 'base.html' %}
+{% block style %}
+   <style> 
+    .card {
+    padding: 30px 40px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+        border: none !important;
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2)
+    }
+
+    .blue-text {
+        color: #00BCD4
+    }
+
+    .form-control-label {
+        margin-bottom: 0
+    }
+
+    input,
+    textarea,
+    button {
+        padding: 8px 15px;
+        border-radius: 5px !important;
+        margin: 5px 0px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        font-size: 18px !important;
+        font-weight: 300
+    }
+
+    input:focus,
+    textarea:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: 1px solid black;
+        outline-width: 0;
+        font-weight: 400
+    }
+    .title-box .border,
+    .btn-primary,
+    .back-to-top,
+    .logo i,
+    .question-q-box,
+    .social-circle li a {
+        color: balck !important;
+        background-color: yellow !important; 
+        border: 1px solid yellow; 
+        
+        box-shadow: 0 0 10px yellow; 
+    }
+    .btn-primary {
+        color: black !important;
+        
+    }
+    .btn-block:hover {
+        color: white !important;
+    }
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
+        background-color: yellow !important;
+        border: 1px solid white !important;
+        
+    }
+
+    .btn-block {
+        text-align: center; 
+        display: block;  auto; 
+        text-transform: uppercase;
+        font-size: 15px !important;
+        font-weight: 400;
+        height: 43px;
+        cursor: pointer;
+    }
+    
+    .form-group.col-sm-6 {
+    margin: auto !important;
+    }
+
+
+
+
+    .btn-block:hover {
+        color: black !important
+    }
+ 
+
+    button:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        outline-width: 0
+    }  
+    .header{
+        display:none;
+    }
+    /* Common styles for the header */
+    header {
+        background-color: #101010;
+        color: #fff;
+        padding: 40px 0; /* Increase the header's height */
+        display: flex;
+        justify-content: center; /* Center the content horizontally */
+        align-items: center; /* Center the content vertically */
+    }
+    
+    /* CSS for the navigation links */
+    nav {
+        display: flex;
+    }
+    
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 15px; /* Add margin to space out the links */
+        font-size:17px;
+        transition: color 0.3s;
+        font-weight: bold;
+    }
+    
+    nav a:hover {
+        color: yellow;
+        text-decoration: none; /* Remove underline on hover */
+    }
+    
+    /* Styles for smaller screens (phones) */
+    @media (max-width: 767px) {
+        nav {
+            display: none; /* Initially hidden on smaller screens */
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        header {
+            padding: 20px 0; /* Reduce the header's height on smaller screens */
+        }
+    
+        nav.active {
+            display: flex; /* Show the navigation links when the menu is active */
+        }
+    }
+    /* CSS for the logo */
+    .logo {
+        font-weight: bold;
+        font-size: 40px;
+        color: white; 
+        text-decoration: none; 
+        margin-right: 20px; 
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    .logo:hover {
+        color: #f7f7f7 ; 
+        text-decoration: none; 
+    }
+    
+ </style>
+
+{% endblock style %}
+
+{% block content %}
+
+    {% if messages %}
+    <div class="card notification-card notification-invitation">
+        <div class="card-body">
+        {% for message in messages %}
+                <div class="card-title">{{message}} </div>
+            {% endfor %}
+        </div>
+      </div> 
+    {% endif %}
+    <header>
+        
+        <a href="{% url 'home'  %}" class="logo">GAE IKKIS</a>
+        
+        <nav>
+            
+            <a href="http://127.0.0.1:8000/#team">Notre équipe</a>
+            <a href="http://127.0.0.1:8000/#services">Services</a>
+            <a href="http://127.0.0.1:8000/#contact">Contactez-nous</a>
+            
+        </nav>
+    </header>
+    <div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <h3>
+                    Prenez un rendez-vous
+                </h3>
+                <p class="blue-text" style=color:black>Utilisez le formulaire suivant pour nous contacter et demander un rendez-vous.</p>
+                <div class="card">
+                    
+                    <form class="form-card" method="POST" action="{% url 'appointment' %}">
+                    {% csrf_token %}
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                            <label class="form-control-label px-3">Prenom<span class="text-danger"> *</span>
+                            </label> 
+                            <input required type="text" id="fname" name="fname" placeholder="Entrez votre prénom" onblur="validate(1)"> 
+                        </div>
+
+                        <div class="form-group col-sm-6 flex-column d-flex"> 
+                            <label class="form-control-label px-3">Nom<span class="text-danger"> *</span></label> 
+                            <input required type="text" id="lname" name="lname" placeholder="Entrez votre nom" onblur="validate(2)"> 
+                        </div>
+
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Email<span class="text-danger"> *</span>
+                                </label> 
+                                <input type="text" id="email" name="email" placeholder="Entrez votre email" onblur="validate(3)"> 
+                            </div>
+
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                             <label class="form-control-label px-3">Numero de telephone<span class="text-danger"> *</span></label> 
+                              <input type="text" id="mob" name="mobile" placeholder="Entrez votre numero de telephone" onblur="validate(4)"> 
+                            </div>
+
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-12 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Votre message<span class="text-danger"> *</span></label> 
+                                <textarea type="date" id="ans" name="request" placeholder="" onblur="validate(6)"></textarea> 
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6" > <button type="submit" class="btn-block btn-primary">Envoyer</button> </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+  
+  {% block script %}
+    function validate(val) {
+    v1 = document.getElementById("fname");
+    v2 = document.getElementById("lname");
+    v3 = document.getElementById("email");
+    v4 = document.getElementById("mob");
+    v5 = document.getElementById("job");
+    v6 = document.getElementById("ans");
+
+    flag1 = true;
+    flag2 = true;
+    flag3 = true;
+    flag4 = true;
+    flag5 = true;
+    flag6 = true;
+
+    if(val>=1 || val==0) {
+    if(v1.value == "") {
+    v1.style.borderColor = "red";
+    flag1 = false;
+    }
+    else {
+    v1.style.borderColor = "green";
+    flag1 = true;
+    }
+    }
+
+    if(val>=2 || val==0) {
+    if(v2.value == "") {
+    v2.style.borderColor = "red";
+    flag2 = false;
+    }
+    else {
+    v2.style.borderColor = "green";
+    flag2 = true;
+    }
+    }
+    if(val>=3 || val==0) {
+    if(v3.value == "") {
+    v3.style.borderColor = "red";
+    flag3 = false;
+    }
+    else {
+    v3.style.borderColor = "green";
+    flag3 = true;
+    }
+    }
+    if(val>=4 || val==0) {
+    if(v4.value == "") {
+    v4.style.borderColor = "red";
+    flag4 = false;
+    }
+    else {
+    v4.style.borderColor = "green";
+    flag4 = true;
+    }
+    }
+    if(val>=5 || val==0) {
+    if(v5.value == "") {
+    v5.style.borderColor = "red";
+    flag5 = false;
+    }
+    else {
+    v5.style.borderColor = "green";
+    flag5 = true;
+    }
+    }
+    if(val>=6 || val==0) {
+    if(v6.value == "") {
+    v6.style.borderColor = "red";
+    flag6 = false;
+    }
+    else {
+    v6.style.borderColor = "green";
+    flag6 = true;
+    }
+    }
+
+    flag = flag1 && flag2 && flag3 && flag4 && flag5 && flag6;
+
+    return flag;
+    }
+ {% endblock script %}

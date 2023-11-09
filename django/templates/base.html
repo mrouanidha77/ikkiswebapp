@@ -1,0 +1,135 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{{title}}</title>
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+</head>
+{% block style %}
+
+<style>
+    
+/* logo css */
+.navbar-brand {
+        font-family: 'Tahoma' sans-serif;
+        font-size:40px;
+    }
+/* logo margin */    
+.navbar-brand {
+        margin-left: 50px; 
+    }
+/* menu items css*/
+.nav-item a {
+        
+        font-size: 20px; 
+        
+    }
+.nav-item a:hover{
+    color:yellow;
+}
+#navcol-1{
+    margin-left:60px;
+}
+.fa, .far, .fas{
+    margin-top:4px
+}
+.badge {
+    margin-top:5px
+    
+}
+.nav-item:hover > .nav-link {
+    color: yellow !important;
+}
+.header .navbar {
+    background:transparent;
+    padding-top:.75rem;
+    padding-bottom:.75rem;
+    color:rgb(255, 255, 255);
+    border-radius:0;
+    box-shadow:none;
+    border:none;
+  }
+</style>
+
+{% endblock style %}
+</style>
+<body>
+
+  <div class="header" style="
+  border-raduis=20px;
+  background:  url('../static/img/heroimg.png') no-repeat fixed ;
+  background-position: calc(90% - 20px) ;
+  background-color:#101010;
+  
+  {% if "appointment" in request.path %}
+  max-height:300px!important;min-height:300px!important;
+  {% endif %}
+  ">
+    
+    <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+        <div class="container"><a class="navbar-brand" href="{% url 'home' %}">GAE IKKIS</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse"
+                id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" href="#team">Notre équipe</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" href="#services">Services</a>
+                    </li>
+                    
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" href="http://127.0.0.1:8000/make-an-appointment/">Prenez un rendez-vous</a>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" href="#contact">Contactez-nous</a>
+                    </li>
+                    
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link active" href="{% url 'manage' %}">Gérer</a>
+                  </li>
+                  {% endif %}
+                  {% if user.is_staff %}
+                  <li class="nav-item" role="presentation">
+                      <a href="{% url 'manage' %}" style="float: left; cursor: pointer;" aria-expanded="true" title="Vous avez de nouveaux rendez-vous">
+                          <i class="far fa-bell" style="font-size: 20px; float: left; color: yellow;"></i>
+                      </a>
+                      <span class="badge badge-danger">{{ count }}</span>
+                  </li>
+                  {% endif %}
+                  
+         
+                </ul>
+            </div>
+        </div>
+    </nav>
+   
+   {% block cta %}{% endblock cta %}
+</div>
+
+
+    {% block content %}{% endblock content %}
+
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+  
+ <script>
+    {% block script %}{% endblock script %}
+ </script>
+</body>
+
+</html>

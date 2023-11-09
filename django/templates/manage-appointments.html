@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block style %}
+
+<style>
+  .header{
+    display:none;
+}
+/* Common styles for the header */
+header {
+    background-color: #101010;
+    color: #fff;
+    padding: 40px 0; /* Increase the header's height */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+}
+
+/* CSS for the navigation links */
+nav {
+    display: flex;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px; /* Add margin to space out the links */
+    font-size:17px;
+    transition: color 0.3s;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: yellow;
+    text-decoration: none; /* Remove underline on hover */
+}
+
+/* Styles for smaller screens (phones) */
+@media (max-width: 767px) {
+    nav {
+        display: none; /* Initially hidden on smaller screens */
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header {
+        padding: 20px 0; /* Reduce the header's height on smaller screens */
+    }
+
+    nav.active {
+        display: flex; /* Show the navigation links when the menu is active */
+    }
+}
+/* CSS for the logo */
+.logo {
+    font-weight: bold;
+    font-size: 40px;
+    color: white; 
+    text-decoration: none; 
+    margin-right: 20px; 
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.logo:hover {
+    color: #f7f7f7 ; 
+    text-decoration: none; 
+}
+/* CSS to style the div and button */
+.button-container {
+    
+    text-align: center; /* Center the button horizontally within the div */
+    margin: 20px; /* Add some spacing around the div */
+}
+
+.custom-button {
+  text-decoration:none;
+    background-color: yellow; /* Background color of the button */
+    color: black; /* Text color of the button */
+    padding: 10px 20px; /* Padding inside the button */
+    border: 1px solid black; /* Black border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change the cursor to a hand when hovering */
+    font-size: 16px; /* Font size of the button text */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition on hover */
+}
+
+.custom-button:hover {
+    background-color: yellow; /* Change the background color on hover */
+    color: white; /* Change the text color on hover to white */
+    border-color: white; /* Change the border color on hover to white */
+    box-shadow: 0 0 10px yellow; /* Add a yellow glow on hover */
+}
+
+#btn1:hover {
+  background-color: yellow !important;
+  border :1px solid white !important;
+  
+}
+
+</style>
+{% endblock style %}
+
+{% block content %}
+
+{% if messages %}
+    <div class="card notification-card notification-invitation">
+        <div class="card-body">
+        {% for message in messages %}
+                <div class="card-title">{{message}} </div>
+            {% endfor %}
+        </div>
+      </div> 
+    {% endif %}
+    
+    <header>
+        
+      <a href="{% url 'home'  %}" class="logo">GAE IKKIS</a>
+      
+      <nav>
+          
+         
+          
+      </nav>
+  </header>
+    <div class="container mt-5">
+        <div class="col-11 text-center mt-4 mb-4">
+            <h3>
+                Gérer les rendez-vous
+            </h3>
+        </div>
+        <div class="row">
+
+        {% for app in appointments %}
+            <div class="col-lg-4">
+                <div class="card card-margin">
+                    <div class="card-header no-border">
+                        <h5 class="card-title">{{app.first_name}}</h5>
+                    </div>
+                    <div class="card-body pt-0">
+                        <div class="widget-49">
+                            <div class="widget-49-title-wrapper">
+                                <div class="widget-49-date-primary">
+                                    <span class="widget-49-date-day">{{app.sent_date|date:"d"}}</span>
+                                    <span class="widget-49-date-month">{{app.sent_date|date:"M"}}</span>
+                                </div>
+                                <div class="widget-49-meeting-info">
+                                    <span class="widget-49-pro-title">{{app.email}}</span>
+                                    <span class="widget-49-meeting-time">{{app.phone}}</span>
+                                
+                                    
+                                </div>
+                            </div>
+                            <div class="widget-49-meeting-points">
+                                <span>{{app.request}}</span>
+                            </div>
+                            <hr class="w-100">
+                            {% if app.accepted == False %}
+                            <form method="POST" action="{% url 'manage' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="date" name="date" class="form-control mb-2" 
+                                    placeholder="dd-mm-yyyy" value=""
+                                    min="1997-01-01" max="2030-12-31">
+                                    <input hidden="true" name="appointment-id" value="{{app.id}}">
+                                <input class="btn-block btn-primary form-control" id="btn1" type="submit" value="Accept">
+                            </div>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        </div >
+        <div class="button-container">
+            <a href="{% url 'home' %}" class="custom-button">Retour à la page home</a>
+  
+        </div>
+
+        {% if is_paginated %}
+        <div class="wrapper">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{page_obj.prebious_page_number}}">Précédent</a></li>
+                    {% endif %}
+                    {% for number in page_obj.paginator.page_range %}
+                    <li class="page-item"><a class="page-link" href="?page={{number}}">{{number}}</a></li>
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{page_obj.prebious_page_number}}">Suivant</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        
+
+        {% endif %}
+
+{% endblock content %}

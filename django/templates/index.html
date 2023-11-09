@@ -1,0 +1,357 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block cta %}
+<style>
+<!--rendez vous button css-->
+.header .action-button, .header .action-button:not(.disabled):active {
+  border-radius: 30px;
+  box-shadow: none;
+  text-shadow: none;
+  padding: 0.3rem 0.8rem;
+  background: transparent;
+  transition: background-color 0.25s;
+  outline: none;
+}
+
+.header .action-button {
+  background-color: yellow; 
+  box-shadow: 0 0 25px yellow; 
+  color:black;
+}
+.header .action-button:hover {
+  border-color: white; /* Change the border color to white on hover */
+}
+.display-4{
+  font-family: 'Trebuchet MS' sans-serif;
+  font-weight:bolder;
+  
+}
+.lead{
+  font-family: 'Trebuchet MS' sans-serif;
+  font-size:25px;
+  font-weight:normal;
+  
+}
+
+.rounded-circle {
+  border-radius: 40%!important;
+}
+.bg-primary {
+  background-color: white !important
+}
+.fw-light{
+  font-family:'Trebuchet MS' sans-serif 
+  font-weight: bolder
+  font-size:125px;
+}
+.h1, h1 {
+  font-size: 60px;
+
+}
+.contact-heading{
+  text-align:center
+}
+.ctc-heading{
+  margin:120px
+}
+#ser-cont{
+  border-radius:20px
+  
+}
+.rows{
+  margin-buttom:50px
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0.5rem;
+  /* font-weight: 600; */
+  line-height: 1.2;
+}
+#ctc-head{
+  
+  margin:auto
+}
+.col-sm-6{
+  margin:auto;
+  
+}
+.btn-shadow.btn-primary {
+  margin:auto;
+  background-color: yellow; 
+  box-shadow: 0 0 25px yellow; 
+  color:black;
+  
+}
+.title-box .border, .btn-primary, .back-to-top, .logo i, .question-q-box, .social-circle li a:hover {
+  background-color: #FFEB3B !important;
+}
+.title-box .border, 
+.btn-primary, 
+.back-to-top, 
+.logo i, 
+.question-q-box, 
+.social-circle li a {
+  background-color: #FFEB3B !important;
+  color: black !important;
+  border: 1px solid black !important;
+  border-radius: 20px !important;
+  padding: 10px 30px; 
+}
+
+.title-box .border:hover, 
+.btn-primary:hover, 
+.back-to-top:hover, 
+.logo i:hover, 
+.question-q-box:hover, 
+.social-circle li a:hover {
+  background-color: #FFEB3B !important;
+  color: white !important; /* Change text color to white on hover */
+  border: 1px solid white !important; /* Change border color to white on hover */
+}
+
+.form-control{
+  
+  margin:auto;
+  border-radius:15px;
+  height:50px;
+  width:600px;
+  
+  
+}
+input#name2 {
+  width: 100%;
+}
+input#email2 {
+  width: 100%;
+}
+textarea#message2 {
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  textarea#message2 {
+    width: 300px;
+  }
+}
+.col-sm-6 {
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 100%;
+}
+.text-muted {
+  color: black!important;
+}
+.addr{
+  font-weight:bolder;
+  color black !important;
+}
+.add-location{
+  color:black;
+  text-decoration:none;
+}
+.add-location:hover{
+  color:black;
+  
+}
+</style>
+<div class="container hero">
+        <div class="row">
+            <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
+                <h1 style="font-family: 'Trebuchet MS', sans-serif;">Devenez le héros de la route, <br>avec notre auto-école.</h1>
+                <p> Explorez le chemin de la sécurité routière et débloquez votre potentiel de conduite avec notre équipe d'instructeurs dévoués. </p>
+                    <a href="{% url "appointment" %}" class="btn btn-light btn-lg action-button" type="button">Prendre un rendez-vous</a>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock cta %}
+{% block content %}
+<section class="container py-5"  style="margin-block:200px;" id="team">
+    <div class="row text-center ">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-4">Notre équipe</h1>
+            <p class="lead">Faites confiance à des professionnels confirmés et compétents.
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row text-center">
+          <!-- Team item -->
+          <div class="col-xl-3 col-sm-6 mb-5">
+            <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'img/team3.png' %}" alt="" class=" mh-100img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                <h5 class="mb-0">Mr Mohamed</h5>
+                <span class="small text-uppercase text-muted">PDG<br><br></span>
+            </div>
+        </div><!-- End -->
+<!-- Team item -->
+<div class="col-xl-3 col-sm-6 mb-5">
+  <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'img/team10.png' %}" alt="" class=" mh-100 rounded-circle mb-3 img-thumbnail shadow-sm">
+      <h5 class="mb-0">Mr Yassine </h5>
+      <span class="small text-uppercase text-muted">L'enseignant de la conduite et de la sécurité routière</span>
+  </div>
+</div><!-- End -->
+            <!-- Team item -->
+            <div class="col-xl-3 col-sm-6 mb-5">
+                <div class="bg-white rounded shadow-sm py-5 px-4" id="team-img"><img src="{% static 'img/team2.png' %}" alt="" class=" mh-100img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                    <h5 class="mb-0">Mr Abdesamad</h5>
+                    <span class="small text-uppercase text-muted">Moniteur d'auto-école<br><br></span>
+                </div>
+            </div><!-- End -->
+
+            
+
+            
+
+            <!-- Team item -->
+            <div class="col-xl-3 col-sm-6 mb-5">
+                <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'img/team6.png' %}" alt="" class=" mh-100img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                    <h5 class="mb-0">Mr Hassan</h5>
+                    <span class="small text-uppercase text-muted">Responsable de suivie<br><br></span>
+                </div>
+            </div><!-- End -->
+        </div>
+    </div>
+</section><!-- End -->
+
+
+
+<section id="services">
+  <div class="bg-primary text-center py-5 mb-4">
+      <div class="container">
+        <h1 class="fw-light text-black ">Services</h1>
+        <p class="overview">Services de permis de conduire sans effort pour les conducteurs.</p>
+      </div>
+    </div>
+  <div class="container">
+    <div class="row">
+      <!-- Team Member 1 -->
+      <div class="col-xl-3 col-md-6 mb-4" >
+        <div class="card border-0 shadow" id="ser-cont">
+          <img src="{% static 'img/service3.png' %}" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Formation à la Conduite Responsable et Sûre<br></h5>
+            <div class="card-text text-black-50">La Formation à la Conduite dispensée par notre auto-école est le moyen idéal d'acquérir les compétences essentielles pour devenir un conducteur sûr et compétent.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Team Member 2 -->
+      <div class="col-xl-3 col-md-6 mb-4" >
+        <div class="card border-0 shadow" id="ser-cont">
+          <img src="{% static 'img/service2.png' %}" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Cours de Code de la Route<br></h5>
+            <div class="card-text text-black-50">une formation essentielle pour comprendre et respecter les règles de conduite, y compris les panneaux de signalisation et les priorités.<br><br><br></div>
+          </div>
+        </div>
+      </div>
+      <!-- Team Member 3 -->
+      <div class="col-xl-3 col-md-6 mb-4" >
+        <div class="card border-0 shadow" id="ser-cont">
+          <img src="{% static 'img/service1.png' %}" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Préparation Pratique à l'Examen de Permis<br></h5>
+            <div class="card-text text-black-50">un service qui vous permet de vous entraîner et de vous familiariser avec les épreuves pratiques de l'examen de permis de conduire<br><br><br></div>
+          </div>
+        </div>
+      </div>
+      <!-- Team Member 4 -->
+      <div class="col-xl-3 col-md-6 mb-4" >
+        <div class="card border-0 shadow" id="ser-cont">
+          <img src="{% static 'img/service4.png   ' %}" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Support Après-Vente de Qualité<br></h5>
+            <div class="card-text text-black-50">Chez notre auto-école, notre engagement envers nos élèves va bien au-delà de l'obtention du permis de conduire.<br><br><br></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+  
+  </div>
+</section>
+<div class="ctc-heading" id="ctc-head">
+  <h1 class="contact-heading text-black ">Contactez-nous</h1>
+
+</div>
+
+
+<section id="contact" class="card m-4 p-4">
+    <div class="container">
+        <div class="row text-center">
+          
+            <div class="col-sm-6">
+            <div class="contact-detail-box">
+              <i class="far fa-envelope text-colored fa-3x"></i>
+              <h4>Entrer en contact</h4>
+             
+              <a href="mailto:ikkisauto@gmail.com" class="text-muted" style="font-weight: bold ;color:black;">ikkisauto@gmail.com</a>
+
+            </div>
+          </div><!-- end col -->
+  
+          <div class="col-sm-6">
+            <div class="contact-detail-box">
+              <i class="fa fa-map-marker fa-3x text-colored"></i>
+              <h4>Notre emplacement</h4>
+  
+              <address class="addr">
+                
+                <a href="https://maps.app.goo.gl/M4DKWxyJoooRhPGf8" class="add-location">228 Av. Al-Maghreb Al-Arabi<br> Ouarzazate 45000<br></a>
+              
+            </address>
+            </div>
+          </div><!-- end col -->
+  
+  
+  
+        </div>
+        <!-- end row -->
+  
+  
+        <div class="row">
+          <div class="col-sm-6" id="ctc">
+           
+          <!-- Contact form -->
+          <div class="col-sm-6">
+            <form role="form" name="ajax-form" id="ajax-form" method="post" class="form-main" action="{% url 'home' %}">
+            {% csrf_token %}
+              <div class="form-group">
+                <label for="name2">Nom</label>
+                <input class="form-control" id="name2" name="name" type="text" placeholder="nom">
+                <div class="error" id="err-name" style="display: none;">Enter votre nom </div>
+              </div> <!-- /Form-name -->
+  
+              <div class="form-group">
+                <label for="email2">Email</label>
+                <input class="form-control" id="email2" name="email" type="text" placeholder="email">
+                <div class="error" id="err-emailvld" style="display: none;">E-mail n'est pas valide</div> 
+              </div> <!-- /Form-email -->
+  
+              <div class="form-group">
+                <label for="message2">Message</label>
+                <textarea class="form-control" id="message2" name="message" rows="5" placeholder="message">Message</textarea>
+  
+                <div class="error" id="err-message" style="display: none;">Enter un message svp</div>
+              </div> <!-- /col -->
+  
+              <div class="row">            
+                  <button type="submit" class="btn btn-primary btn-shadow btn-rounded w-md" id="send">Envoyer</button>
+                </div> <!-- /col -->
+              </div>
+              <br> <!-- /row -->
+              {% if request.GET.success_message %}
+              <div class="alert alert-success">
+              {{ request.GET.success_message }}
+              </div>
+              {% endif %}
+
+            </form> <!-- /form -->
+          </div> <!-- end col -->
+  
+        </div> <!-- end row -->
+            
+      </div>
+</section>
+
+
+{% endblock content %}
